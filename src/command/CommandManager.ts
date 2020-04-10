@@ -2,7 +2,7 @@ import CharmClient from '../CharmClient';
 import Command from './Command';
 import { Collection, Message } from 'discord.js';
 import CommandExecution from './CommandExecution';
-import CoreModule from '../CoreModule';
+import CoreModule from '../module/CoreModule';
 
 export default class CommandManager {
 	private commandStore: Collection<string, Command>;

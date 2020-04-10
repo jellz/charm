@@ -1,9 +1,9 @@
-import Module from './module/Module';
+import Module from './Module';
 import { Message, User } from 'discord.js';
-import EventHandler from './eventHandler/EventHandlerDecorator';
-import CommandExecution from './command/CommandExecution';
-import Command from './command/Command';
-import CommandParameter from './command/CommandParameter';
+import EventHandler from '../eventHandler/EventHandlerDecorator';
+import CommandExecution from '../command/CommandExecution';
+import Command from '../command/Command';
+import CommandParameter from '../command/CommandParameter';
 
 export default class CoreModule extends Module {
 	@EventHandler('ready')

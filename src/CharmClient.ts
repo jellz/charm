@@ -7,7 +7,7 @@ import EventHandler from './eventHandler/EventHandler';
 import EventManager from './eventHandler/EventManager';
 import CommandManager from './command/CommandManager';
 
-import CoreModule from './CoreModule';
+import CoreModule from './module/CoreModule';
 import ModuleManager from './module/ModuleManager';
 
 interface CharmOptions {
