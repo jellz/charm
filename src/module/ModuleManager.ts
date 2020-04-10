@@ -16,11 +16,14 @@ export default class ModuleManager {
 	}
 
 	registerModule(module: typeof Module) {
-		if (module.name == 'Module')
+		if (module.name === 'Module')
 			throw new TypeError(
 				'Please register a module instead of the base Module class'
-			);
-		const mod = new module(this.client);
+      );
+    let mod: Module; 
+		if (module.name === 'CoreModule')
+			mod = new module(this.client, 'coreModule');
+		else mod = new module(this.client);
 		mod.getEventHandlers().forEach((h: EventHandler) => {
 			h.function = h.function.bind(mod);
 			this.client.eventManager.registerEventHandler(h);
@@ -29,7 +32,7 @@ export default class ModuleManager {
 			c.function = c.function.bind(mod);
 			this.client.commandManager.registerCommand(c);
 		});
-		this.moduleStore.set(module.name, mod);
+		this.moduleStore.set(mod.id.toString(), mod);
 	}
 
 	loadModules(folderPath: string) {
@@ -48,9 +51,9 @@ export default class ModuleManager {
 				throw new Error(`The module ${fn} does not have a default export`);
 			}
 		});
-  }
-  
-  getModule(id: string) {
-    return this.moduleStore.get(id);
-  }
+	}
+
+	getModule(id: string) {
+		return this.moduleStore.get(id);
+	}
 }

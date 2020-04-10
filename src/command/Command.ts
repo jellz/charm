@@ -3,7 +3,8 @@ import Module from '../module/Module';
 import CommandParameter from './CommandParameter';
 
 export default class Command {
-	public readonly id: string;
+  public readonly id: Symbol | string;
+  public name: string;
 	public function: Function;
 
 	// Command Options
@@ -15,7 +16,7 @@ export default class Command {
 	public readonly params: CommandParameter[];
 
 	constructor(
-		id: string,
+    name: string,
 		options: Partial<CommandOptions>,
 		func: Function,
 		module: Module,
@@ -25,7 +26,8 @@ export default class Command {
 		this.description = options.description || null;
 		this.restLastParameter = options.restLastParameter || false;
 
-		this.id = id;
+    this.id = options.id || Symbol(name);
+    this.name = options.name || name;
 		this.function = func;
 		this.module = module;
 		this.params = params;

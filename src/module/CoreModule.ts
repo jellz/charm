@@ -2,16 +2,16 @@ import Module from './Module';
 import { Message, User } from 'discord.js';
 import EventHandler from '../eventHandler/EventHandlerDecorator';
 import CommandExecution from '../command/CommandExecution';
-import Command from '../command/Command';
-import CommandParameter from '../command/CommandParameter';
+import Command from '../command/CommandDecorator';
+import { default as CommandClass } from '../command/Command';
 
 export default class CoreModule extends Module {
-	@EventHandler('ready')
+	@EventHandler('ready', { id: 'coreReadyHandler' })
 	ready() {
 		console.log(`Logged in as ${this.client.user?.tag}!!!`);
 	}
 
-	@EventHandler('message', { description: 'The command dispatcher' })
+	@EventHandler('message', { description: 'The command dispatcher', id: 'coreCommandDispatcher' })
 	onMessage(msg: Message) {
 		if (
 			msg.author.bot ||
@@ -46,7 +46,7 @@ export default class CoreModule extends Module {
 	USER_MENTION_OR_ID_REGEX = /(<@)?!?\d{17,20}>?/;
 	USER_MENTION_REGEX = /^<@!?(\d+)>$/;
 
-	parseCommandArguments(cmd: Command, args: string[]) {
+	parseCommandArguments(cmd: CommandClass, args: string[]) {
 		const callArgs: any[] = [];
 		const refArgs = args.slice(0); //create a copy
 		const minimumArgLength = cmd.params.filter(c => !c.optional).length - 1;
@@ -114,5 +114,6 @@ export default class CoreModule extends Module {
 			args.shift();
 		}
 		return callArgs;
-	}
+  }
+  
 }

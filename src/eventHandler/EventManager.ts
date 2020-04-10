@@ -19,6 +19,6 @@ export default class EventManager {
 		this.client.on(event.eventName as keyof ClientEvents, (...params) =>
 			event.function(...params)
 		);
-		this.eventStore.set(event.name, event);
+		this.eventStore.set(event.id.toString(), event);
 	}
 }
