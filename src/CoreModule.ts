@@ -3,6 +3,7 @@ import { Message, User } from 'discord.js';
 import EventHandler from './eventHandler/EventHandlerDecorator';
 import CommandExecution from './command/CommandExecution';
 import Command from './command/Command';
+import CommandParameter from './command/CommandParameter';
 
 export default class CoreModule extends Module {
 	@EventHandler('ready')
@@ -39,56 +40,79 @@ export default class CoreModule extends Module {
 			message: msg,
 		};
 		this.client.commandManager.dispatchCommand(execution);
-		// console.log('dispatched', execution);
 	}
 
 	// REGEX
 	USER_MENTION_OR_ID_REGEX = /(<@)?!?\d{17,20}>?/;
 	USER_MENTION_REGEX = /^<@!?(\d+)>$/;
 
-	parseCommandArguments(cmd: Command, args: string[], params: Function[]) {
-		let i: number = 0;
+	parseCommandArguments(cmd: Command, args: string[]) {
 		const callArgs: any[] = [];
 		const refArgs = args.slice(0); //create a copy
-		params.forEach((p: Function) => {
-			console.log(i);
-			let element: string;
-			console.log(args);
-			if (i === params.length - 1) {
-				console.log('last arg ', args.join(' '));
+		const minimumArgLength = cmd.params.filter(c => !c.optional).length - 1;
+		const params = cmd.params.slice(0);
+		if (args.length < minimumArgLength)
+			throw TypeError(
+				`Expected ${minimumArgLength} arguments but only found ${args.length}`
+			);
+		// console.log(refArgs);
+		params.shift();
+		for (const i in refArgs) {
+			let arg = refArgs[i];
+			const p = params[i];
+
+			// add single arg mode support
+
+			if (p === params[params.length - 1] && cmd.restLastParameter) {
 				callArgs.push(args.join(' '));
-			}
-			switch (p) {
-				case User:
-					element = refArgs[i].replace(/[\\<>@#&!]/g, '');
-					if (this.USER_MENTION_OR_ID_REGEX.test(refArgs[i])) {
-						const userMatch =
-							this.USER_MENTION_OR_ID_REGEX.exec(element) ||
-							this.USER_MENTION_REGEX.exec(element) ||
-							[];
-						const id = userMatch[1] ? userMatch[1] : userMatch[0];
-						const userArg = this.client.users.cache.get(id);
-						callArgs.push(userArg);
-					} else throw new TypeError(`Missing desired argument: ${p.name}`);
-					break;
+        return callArgs;
+      }
 
-				case Number:
-					element = refArgs[i];
-					if (isNaN(parseInt(element)))
-						throw new TypeError(`Missing desired argument: ${p.name}`);
-					callArgs.push(parseInt(element));
-					break;
+      if (!p) return callArgs;
 
-				case String:
-					element = refArgs[i];
-					if (!element)
-						throw new TypeError(`Missing desired argument: ${p.name}`);
-					callArgs.push(element.toString());
-					break;
+			try {
+				switch (p.fn) {
+					case User:
+						arg = refArgs[i];
+						if (!arg)
+							throw new TypeError(`Missing desired argument: ${p.fn.name}`);
+						const noMention = arg.replace(/[\\<>@#&!]/g, '');
+
+						if (this.USER_MENTION_OR_ID_REGEX.test(refArgs[i])) {
+							const userMatch =
+								this.USER_MENTION_OR_ID_REGEX.exec(noMention) ||
+								this.USER_MENTION_REGEX.exec(noMention) ||
+								[];
+							const id = userMatch[1] ? userMatch[1] : userMatch[0];
+							const userArg = this.client.users.cache.get(id);
+							callArgs.push(userArg);
+						} else
+							throw new TypeError(`Missing desired argument: ${p.fn.name}`);
+
+						break;
+
+					case Number:
+						arg = refArgs[i];
+						if (isNaN(parseInt(arg)))
+							throw new TypeError(`Missing desired argument: ${p.fn.name}`);
+						callArgs.push(parseInt(arg));
+						break;
+
+					case String:
+						arg = refArgs[i];
+						if (!arg)
+							throw new TypeError(`Missing desired argument: ${p.fn.name}`);
+						callArgs.push(arg.toString());
+						break;
+				}
+			} catch (err) {
+				const error: Error = err;
+				if (error.message.includes('Missing desired argument') && p.optional)
+					return callArgs;
+				else throw err;
 			}
-			i++;
 			args.shift();
-		});
+		}
 		return callArgs;
 	}
 }

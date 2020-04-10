@@ -30,8 +30,7 @@ export default class CommandManager {
 			const coreMod = this.client.moduleManager.getModule('CoreModule') as CoreModule;
 			const callArgs: any[] = coreMod.parseCommandArguments(
 				cmd,
-				execution.args,
-				cmd.params
+				execution.args
 			);
 			cmd.function(execution, ...callArgs);
 		} catch (err) {

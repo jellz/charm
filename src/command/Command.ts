@@ -1,5 +1,6 @@
 import CommandOptions from './CommandOptions';
 import Module from '../module/Module';
+import CommandParameter from './CommandParameter';
 
 export default class Command {
 	public readonly id: string;
@@ -11,14 +12,14 @@ export default class Command {
 	public restLastParameter: boolean;
 
 	public module: Module;
-	public readonly params: any[];
+	public readonly params: CommandParameter[];
 
 	constructor(
 		id: string,
 		options: Partial<CommandOptions>,
 		func: Function,
 		module: Module,
-		params: any[]
+		params: CommandParameter[],
 	) {
 		this.aliases = options.aliases || [];
 		this.description = options.description || null;
