@@ -27,7 +27,7 @@ export default class CommandManager {
 				`Tried to dispatch a non-existent command? ${execution.message.id}`
 			);
 		try {
-			const coreMod = this.client.modules.get('CoreModule') as CoreModule;
+			const coreMod = this.client.moduleManager.getModule('CoreModule') as CoreModule;
 			const callArgs: any[] = coreMod.parseCommandArguments(
 				cmd,
 				execution.args,
@@ -37,7 +37,7 @@ export default class CommandManager {
 		} catch (err) {
 			console.error(err);
 			const error: Error = err;
-			return execution.message.reply(`error: ${error.message}`);
+			return execution.message.channel.send(`There was an error while executing this command: ${error.message}`);
 		}
 	}
 

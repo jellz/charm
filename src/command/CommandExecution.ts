@@ -9,6 +9,5 @@ export default interface CommandExecution {
   label: string;
   args: string[];
   prefix: string;
-  
 	message: Message;
 }

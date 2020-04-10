@@ -13,7 +13,7 @@ export default function getSpecificChannelFromChannel(channel: Channel) {
 		case 'dm':
 			return channel as DMChannel;
 		case 'text':
-		  return channel as TextChannel;
+			return channel as TextChannel;
 		case 'voice':
 			return channel as VoiceChannel;
 		case 'category':

@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-import CharmClient from './CharmClient';
+import CharmClient from '../CharmClient';
 
 export default class Module {
   public client: CharmClient;

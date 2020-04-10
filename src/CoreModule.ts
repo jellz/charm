@@ -1,4 +1,4 @@
-import Module from './Module';
+import Module from './module/Module';
 import { Message, User } from 'discord.js';
 import EventHandler from './eventHandler/EventHandlerDecorator';
 import CommandExecution from './command/CommandExecution';

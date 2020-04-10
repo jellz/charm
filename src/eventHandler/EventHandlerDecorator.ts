@@ -1,4 +1,4 @@
-import Module from '../Module';
+import Module from '../module/Module';
 import EventHandlerOptions from './EventHandlerOptions';
 import { default as EventHandlerClass } from './EventHandler';
 
@@ -12,8 +12,8 @@ export default function EventHandler(
 		descriptor: PropertyDescriptor
 	) {
 		const eventHandler = new EventHandlerClass(
-      propertyKey,
-      eventName,
+			propertyKey,
+			eventName,
 			options,
 			descriptor.value,
 			target

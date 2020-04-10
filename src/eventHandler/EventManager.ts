@@ -13,11 +13,12 @@ export default class EventManager {
 
 	registerEventHandler(event: EventHandler) {
 		if (!event.eventName)
-      throw "You can't register an event that is missing a Discord.js event name";
-    if (this.eventStore.get(event.id)) throw `An event already exists with this ID (${event.id})`;
+			throw "You can't register an event that is missing a Discord.js event name";
+		if (this.eventStore.get(event.name))
+			throw `An event already exists with this ID (${event.name})`;
 		this.client.on(event.eventName as keyof ClientEvents, (...params) =>
 			event.function(...params)
-    );
-    this.eventStore.set(event.id, event);
+		);
+		this.eventStore.set(event.name, event);
 	}
 }
