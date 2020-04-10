@@ -16,7 +16,7 @@ interface CharmOptions {
 export default class CharmClient extends Client {
 	public commandManager: CommandManager;
 	public eventManager: EventManager;
-	public modules: Set<Module>;
+	public modules: Collection<string, Module>;
 
 	public config: Partial<CharmOptions>;
 
@@ -25,7 +25,7 @@ export default class CharmClient extends Client {
 
 		this.commandManager = new CommandManager(this);
 		this.eventManager = new EventManager(this);
-		this.modules = new Set();
+		this.modules = new Collection();
 
 		this.config = {
 			prefix: options.prefix || 'c!',
@@ -48,7 +48,7 @@ export default class CharmClient extends Client {
 			c.function = c.function.bind(mod);
 			this.commandManager.registerCommand(c);
 		});
-		this.modules.add(mod);
+		this.modules.set(module.name, mod);
 	}
 
 	loadModules(folderPath: string) {

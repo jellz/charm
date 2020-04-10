@@ -2,6 +2,7 @@ import CharmClient from '../CharmClient';
 import Command from './Command';
 import { Collection, Message } from 'discord.js';
 import CommandExecution from './CommandExecution';
+import CoreModule from '../CoreModule';
 
 export default class CommandManager {
 	private commandStore: Collection<string, Command>;
@@ -18,12 +19,27 @@ export default class CommandManager {
 		this.commandStore.set(command.id, command);
 	}
 
-	// This function is called after something determined a command was sent. The purpose of this function is to find the appropriate function to handle the command.
-	dispatchCommand(label: string, execution: CommandExecution) {
-    const cmd = this.getCommandByLabel(label);
-    if (!cmd) return;
-    cmd.function(execution);
-  }
+	// This function is called after something determined a command was sent. The purpose of this function is to find the appropriate function to handle the command and call it.
+	dispatchCommand(execution: CommandExecution) {
+		const cmd = this.getCommandByLabel(execution.label);
+		if (!cmd)
+			return console.error(
+				`Tried to dispatch a non-existent command? ${execution.message.id}`
+			);
+		try {
+			const coreMod = this.client.modules.get('CoreModule') as CoreModule;
+			const callArgs: any[] = coreMod.parseCommandArguments(
+				cmd,
+				execution.args,
+				cmd.params
+			);
+			cmd.function(execution, ...callArgs);
+		} catch (err) {
+			console.error(err);
+			const error: Error = err;
+			return execution.message.reply(`error: ${error.message}`);
+		}
+	}
 
 	getCommandByLabel(label: string) {
 		return this.commandStore.find(
