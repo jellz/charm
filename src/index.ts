@@ -1,5 +1,5 @@
 // Client
-export { default } from './CharmClient';
+export { default } from './client/CharmClient';
 
 // Decorators
 export { default as Command } from './command/decorator/CommandDecorator';
