@@ -14,7 +14,6 @@ export default class Module {
 	constructor(client: CharmClient, id?: string) {
 		this.client = client;
     this.id = id || this.constructor.name;
-
 	}
 
 	getEventHandlers() {
