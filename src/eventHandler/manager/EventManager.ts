@@ -15,7 +15,9 @@ export default class EventManager {
 
 	registerEventHandler(event: EventHandler) {
 		if (!event.eventName)
-			throw "You can't register an event that is missing a Discord.js event name";
+			throw new TypeError(
+				"You can't register an event that is missing a Discord.js event name"
+			);
 		this.client.on(event.eventName as keyof ClientEvents, (...params) =>
 			event.function(...params)
 		);
