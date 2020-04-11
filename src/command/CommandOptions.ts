@@ -1,7 +1,7 @@
 export default interface CommandOptions {
-	aliases: string[];
-  description: string;
-  restLastParameter: boolean;
-  id: string;
-  name: string;
+  name?: string;
+  id?: string;
+  aliases?: string[];
+  description?: string;
+  restLastParameter?: boolean;
 }
