@@ -1,12 +1,7 @@
-import { Client, ClientOptions, Collection } from 'discord.js';
-import { readdirSync } from 'fs';
-import { join } from 'path';
-import Module from './module/Module';
-import Command from './command/Command';
-import EventHandler from './eventHandler/EventHandler';
-import EventManager from './eventHandler/EventManager';
-import CommandManager from './command/CommandManager';
+import { Client, ClientOptions } from 'discord.js';
 
+import EventManager from './eventHandler/manager/EventManager';
+import CommandManager from './command/manager/CommandManager';
 import CoreModule from './module/CoreModule';
 import ModuleManager from './module/ModuleManager';
 

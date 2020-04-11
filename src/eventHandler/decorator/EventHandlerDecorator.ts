@@ -1,6 +1,6 @@
-import Module from '../module/Module';
-import EventHandlerOptions from './EventHandlerOptions';
-import EventHandlerMetadata from './EventHandlerMetadata';
+import type Module from '../../module/Module';
+import type EventHandlerOptions from '../EventHandlerOptions';
+import type EventHandlerMetadata from '../EventHandlerMetadata';
 
 export default function EventHandler(
 	eventName: string,
@@ -11,12 +11,12 @@ export default function EventHandler(
 		propertyKey: string,
 		descriptor: PropertyDescriptor
 	) {
-    const eventHandler: EventHandlerMetadata = {
-      name: propertyKey,
-      eventName,
-      options,
-      function: descriptor.value
-    };
+		const eventHandler: EventHandlerMetadata = {
+			name: propertyKey,
+			eventName,
+			options,
+			function: descriptor.value,
+		};
 		const eventsMetadata: EventHandlerMetadata[] =
 			Reflect.getMetadata('charm:eventsMetadata', target) || [];
 		eventsMetadata.push(eventHandler);

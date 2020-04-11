@@ -1,15 +1,15 @@
-import CommandOptions from './CommandOptions';
-import Module from '../module/Module';
-import CommandParameter from './CommandParameter';
+import type CommandOptions from './CommandOptions';
+import type Module from '../module/Module';
+import type CommandParameter from './CommandParameter';
 
 export default class Command {
-  public options: Partial<CommandOptions>;
+	public options: Partial<CommandOptions>;
 	public name: string;
 	public function: Function;
 	public module: Module;
 	public readonly params: CommandParameter[];
 
-  public id: string;
+	public id: string;
 
 	// Command options
 	public aliases: string[];
@@ -21,18 +21,18 @@ export default class Command {
 		options: Partial<CommandOptions>,
 		func: Function,
 		module: Module,
-    params: CommandParameter[],
+		params: CommandParameter[]
 	) {
-    this.options = options;
+		this.options = options;
 		this.name = this.options.name || name;
 		this.function = func;
-    this.module = module;
+		this.module = module;
 		this.params = params;
 
-    this.id = options.id || `${this.module.id}/${this.name}`;
+		this.id = options.id || `${this.module.id}/${this.name}`;
 
-    // Command options
-    this.aliases = this.options.aliases || [];
+		// Command options
+		this.aliases = this.options.aliases || [];
 		this.description = this.options.description;
 		this.restLastParameter = this.options.restLastParameter || false;
 	}

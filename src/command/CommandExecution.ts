@@ -1,4 +1,7 @@
-import { GuildMember, Message, User, Channel } from 'discord.js';
+import type { GuildMember } from 'discord.js';
+import type { User } from 'discord.js';
+import type { Channel } from 'discord.js';
+import type { Message } from 'discord.js';
 
 export default interface CommandExecution {
   issuer: User;

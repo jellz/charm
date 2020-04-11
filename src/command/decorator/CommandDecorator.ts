@@ -1,9 +1,7 @@
-import Module from '../module/Module';
-import CommandOptions from './CommandOptions';
-import { default as CommandClass } from './Command';
-import { GuildMember, User } from 'discord.js';
-import CommandParameter from './CommandParameter';
-import CommandMetadata from './CommandMetadata';
+import type Module from '../../module/Module';
+import type CommandOptions from '../CommandOptions';
+import type CommandParameter from '../CommandParameter';
+import type CommandMetadata from '../CommandMetadata';
 
 export default function Command(
 	options: Partial<CommandOptions> | undefined = {}

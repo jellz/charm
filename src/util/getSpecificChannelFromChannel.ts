@@ -1,12 +1,10 @@
-import {
-	Channel,
-	DMChannel,
-	TextChannel,
-	VoiceChannel,
-	CategoryChannel,
-	NewsChannel,
-	StoreChannel,
-} from 'discord.js';
+import type { Channel } from 'discord.js';
+import type { DMChannel } from 'discord.js';
+import type { TextChannel } from 'discord.js';
+import type { VoiceChannel } from 'discord.js';
+import type { CategoryChannel } from 'discord.js';
+import type { NewsChannel } from 'discord.js';
+import type { StoreChannel } from 'discord.js';
 
 export default function getSpecificChannelFromChannel(channel: Channel) {
 	switch (channel.type) {

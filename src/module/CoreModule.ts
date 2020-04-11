@@ -1,10 +1,11 @@
-import Module from './Module';
 import { Message, User } from 'discord.js';
-import EventHandler from '../eventHandler/EventHandlerDecorator';
-import CommandExecution from '../command/CommandExecution';
-import Command from '../command/CommandDecorator';
-import { default as CommandClass } from '../command/Command';
-import CharmClient from '../CharmClient';
+
+import Module from './Module';
+import EventHandler from '../eventHandler/decorator/EventHandlerDecorator';
+
+import type { CommandExecution } from '..';
+import type { default as CommandClass } from '../command/Command';
+import type CharmClient from '..';
 
 export default class CoreModule extends Module {
   constructor(client: CharmClient) {

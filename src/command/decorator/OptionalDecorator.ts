@@ -1,4 +1,4 @@
-import Module from '../module/Module';
+import Module from '../../module/Module';
 
 export default function Optional(
 	target: Object,
@@ -11,7 +11,7 @@ export default function Optional(
 	const descriptor = Reflect.getOwnPropertyDescriptor(target, propertyKey);
 	if (descriptor?.value.constructor.name !== 'Function')
 		throw new TypeError(
-			'The decorator must be applied to a function parameter.'
+			'The decorator must be applied to a function parameter'
 		);
 	const arr: number[] =
 		Reflect.getMetadata(

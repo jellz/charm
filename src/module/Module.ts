@@ -1,9 +1,11 @@
 import 'reflect-metadata';
-import CharmClient from '../CharmClient';
-import EventHandlerMetadata from '../eventHandler/EventHandlerMetadata';
+
 import EventHandler from '../eventHandler/EventHandler';
-import CommandMetadata from '../command/CommandMetadata';
 import Command from '../command/Command';
+
+import type CharmClient from '../..';
+import type EventHandlerMetadata from '../eventHandler/EventHandlerMetadata';
+import type CommandMetadata from '../command/CommandMetadata';
 
 export default class Module {
 	public client: CharmClient;

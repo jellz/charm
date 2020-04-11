@@ -1,16 +1,17 @@
-import CharmClient from '../CharmClient';
-import Command from './Command';
-import { Collection, Message } from 'discord.js';
-import CommandExecution from './CommandExecution';
-import CoreModule from '../module/CoreModule';
+import { Collection } from 'discord.js';
+
+import type CharmClient from '../..';
+import type Command from '../Command';
+import type CommandExecution from '../CommandExecution';
+import type CoreModule from '../../module/CoreModule';
 
 export default class CommandManager {
-  private commandStore: Collection<string, Command>;
+	private commandStore: Collection<string, Command>;
 
 	private client: CharmClient;
 
 	constructor(client: CharmClient) {
-    this.commandStore = new Collection();
+		this.commandStore = new Collection();
 
 		this.client = client;
 	}
@@ -29,16 +30,20 @@ export default class CommandManager {
 				`Tried to dispatch a non-existent command? ${execution.message.id}`
 			);
 		try {
-			const coreMod = this.client.moduleManager.getModule('coreModule') as CoreModule;
+			const coreMod = this.client.moduleManager.getModule(
+				'coreModule'
+			) as CoreModule;
 			const callArgs: any[] = coreMod.parseCommandArguments(
 				cmd,
 				execution.args
 			);
 			cmd.function(execution, ...callArgs);
 		} catch (err) {
-      console.error(err);
+			console.error(err);
 			const error: Error = err;
-			return execution.message.channel.send(`There was an error while executing this command: ${error.message}`);
+			return execution.message.channel.send(
+				`There was an error while executing this command: ${error.message}`
+			);
 		}
 	}
 

@@ -1,9 +1,9 @@
-import CommandOptions from "./CommandOptions";
-import CommandParameter from "./CommandParameter";
+import type CommandOptions from './CommandOptions';
+import type CommandParameter from './CommandParameter';
 
 export default interface CommandMetadata {
-  name: string,
-  params: CommandParameter[],
-  options: Partial<CommandOptions>,
-  function: Function,
+	name: string;
+	params: CommandParameter[];
+	options: Partial<CommandOptions>;
+	function: Function;
 }

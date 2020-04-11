@@ -1,10 +1,12 @@
-import CharmClient from '../CharmClient';
-import Module from './Module';
 import { Collection } from 'discord.js';
-import Command from '../command/Command';
-import EventHandler from '../eventHandler/EventHandler';
 import { readdirSync } from 'fs';
 import { join } from 'path';
+
+import type CharmClient from '../..';
+import type Command from '../command/Command';
+import type EventHandler from '../eventHandler/EventHandler';
+
+import Module from './Module';
 
 export default class ModuleManager {
 	private client: CharmClient;
