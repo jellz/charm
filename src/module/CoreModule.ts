@@ -9,7 +9,7 @@ import type CharmClient from '..';
 
 export default class CoreModule extends Module {
   constructor(client: CharmClient) {
-    super(client, 'charmCoreModule');
+    super(client, 'charm:CoreModule');
   }
 
 	@EventHandler('ready', { id: 'coreReadyHandler' })
