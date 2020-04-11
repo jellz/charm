@@ -1,4 +1,4 @@
 export default interface EventHandlerOptions {
-  description: string | undefined;
-  id: string;
+  description?: string;
+  id?: string;
 }
