@@ -3,6 +3,7 @@ import CommandOptions from './CommandOptions';
 import { default as CommandClass } from './Command';
 import { GuildMember, User } from 'discord.js';
 import CommandParameter from './CommandParameter';
+import CommandMetadata from './CommandMetadata';
 
 export default function Command(
 	options: Partial<CommandOptions> | undefined = {}
@@ -46,15 +47,13 @@ export default function Command(
 			else if (!lastOptional && builtParams[i].optional)
 				throw new TypeError('Only last parameters can be optional');
 		}
-		// console.log(`list of CommandParameter for ${propertyKey}`, builtParams);
 
-		const cmd = new CommandClass(
-			propertyKey,
-			options,
-			descriptor.value,
-			target,
-			builtParams
-		);
+    const cmd: CommandMetadata = {
+      name: propertyKey,
+      options,
+      function: descriptor.value,
+      params: builtParams,
+    }
 		const commandsMetadata =
 			Reflect.getMetadata('charm:commandsMetadata', target) || [];
 		commandsMetadata.push(cmd);

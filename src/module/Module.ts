@@ -1,22 +1,28 @@
 import 'reflect-metadata';
 import CharmClient from '../CharmClient';
+import EventHandlerMetadata from '../eventHandler/EventHandlerMetadata';
+import EventHandler from '../eventHandler/EventHandler';
+import CommandMetadata from '../command/CommandMetadata';
+import Command from '../command/Command';
 
 export default class Module {
 	public client: CharmClient;
-	public id: Symbol | string;
+	public id: string;
 
 	constructor(client: CharmClient, id?: string) {
 		this.client = client;
-    this.id = id || Symbol(this.constructor.name);
+    this.id = id || this.constructor.name;
 
-    console.log(this.id);
 	}
 
 	getEventHandlers() {
-		return Reflect.getMetadata('charm:eventsMetadata', this) || [];
-	}
+    const eventsMetadata: EventHandlerMetadata[] = Reflect.getMetadata('charm:eventsMetadata', this) || [];
+    return eventsMetadata.map(m => new EventHandler(m.name, m.eventName, m.options, m.function, this));
+  }
 
 	getCommands() {
-		return Reflect.getMetadata('charm:commandsMetadata', this) || [];
-	}
+    const commandsMetadata: CommandMetadata[] = Reflect.getMetadata('charm:commandsMetadata', this) || [];
+    return commandsMetadata.map(m => new Command(m.name, m.options, m.function, this, m.params));
+  }
+  
 }

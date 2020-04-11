@@ -11,19 +11,18 @@ export default class ModuleManager {
 	private moduleStore: Collection<string, Module>;
 
 	constructor(client: CharmClient) {
-		this.client = client;
 		this.moduleStore = new Collection();
+
+		this.client = client;
 	}
 
 	registerModule(module: typeof Module) {
 		if (module.name === 'Module')
 			throw new TypeError(
 				'Please register a module instead of the base Module class'
-      );
-    let mod: Module; 
-		if (module.name === 'CoreModule')
-			mod = new module(this.client, 'coreModule');
-		else mod = new module(this.client);
+			);
+		let mod: Module;
+		mod = new module(this.client);
 		mod.getEventHandlers().forEach((h: EventHandler) => {
 			h.function = h.function.bind(mod);
 			this.client.eventManager.registerEventHandler(h);
@@ -32,7 +31,7 @@ export default class ModuleManager {
 			c.function = c.function.bind(mod);
 			this.client.commandManager.registerCommand(c);
 		});
-		this.moduleStore.set(mod.id.toString(), mod);
+		this.moduleStore.set(mod.id, mod);
 	}
 
 	loadModules(folderPath: string) {

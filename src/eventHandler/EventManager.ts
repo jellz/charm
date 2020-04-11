@@ -1,24 +1,27 @@
 import CharmClient from '../CharmClient';
 import EventHandler from './EventHandler';
-import { ClientEvents } from 'discord.js';
+import { ClientEvents, Collection } from 'discord.js';
 
 export default class EventManager {
-	private eventStore: Map<string, EventHandler>;
+  private eventStore: Collection<string, EventHandler>;
 	private client: CharmClient;
 
 	constructor(client: CharmClient) {
-		this.eventStore = new Map();
+    this.eventStore = new Collection();
+    
 		this.client = client;
 	}
 
 	registerEventHandler(event: EventHandler) {
 		if (!event.eventName)
 			throw "You can't register an event that is missing a Discord.js event name";
-		if (this.eventStore.get(event.name))
-			throw `An event already exists with this ID (${event.name})`;
 		this.client.on(event.eventName as keyof ClientEvents, (...params) =>
 			event.function(...params)
 		);
-		this.eventStore.set(event.id.toString(), event);
+		this.eventStore.set(event.id, event);
+	}
+
+	getEventsByModule(modId: string) {
+		return this.eventStore.array().filter(e => modId === e.module.id);
 	}
 }

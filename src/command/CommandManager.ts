@@ -5,18 +5,20 @@ import CommandExecution from './CommandExecution';
 import CoreModule from '../module/CoreModule';
 
 export default class CommandManager {
-	private commandStore: Collection<string, Command>;
+  private commandStore: Collection<string, Command>;
+
 	private client: CharmClient;
 
 	constructor(client: CharmClient) {
-		this.commandStore = new Collection();
+    this.commandStore = new Collection();
+
 		this.client = client;
 	}
 
 	registerCommand(command: Command) {
-		if (this.commandStore.get(command.id.toString()))
+		if (this.commandStore.get(command.id))
 			throw `A command with this name already exists (${command.id})`;
-		this.commandStore.set(command.id.toString(), command);
+		this.commandStore.set(command.id, command);
 	}
 
 	// This function is called after something determined a command was sent. The purpose of this function is to find the appropriate function to handle the command and call it.

@@ -4,8 +4,13 @@ import EventHandler from '../eventHandler/EventHandlerDecorator';
 import CommandExecution from '../command/CommandExecution';
 import Command from '../command/CommandDecorator';
 import { default as CommandClass } from '../command/Command';
+import CharmClient from '../CharmClient';
 
 export default class CoreModule extends Module {
+  constructor(client: CharmClient) {
+    super(client, 'coreModule');
+  }
+
 	@EventHandler('ready', { id: 'coreReadyHandler' })
 	ready() {
 		console.log(`Logged in as ${this.client.user?.tag}!!!`);
@@ -55,7 +60,6 @@ export default class CoreModule extends Module {
 			throw TypeError(
 				`Expected ${minimumArgLength} arguments but only found ${args.length}`
 			);
-		// console.log(refArgs);
 		params.shift();
 		for (const i in refArgs) {
 			let arg = refArgs[i];
