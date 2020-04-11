@@ -32,8 +32,8 @@ export default class Command {
     this.id = options.id || `${this.module.id}/${this.name}`;
 
     // Command options
-    this.aliases = options.aliases || [];
-		this.description = options.description;
-		this.restLastParameter = options.restLastParameter || false;
+    this.aliases = this.options.aliases || [];
+		this.description = this.options.description;
+		this.restLastParameter = this.options.restLastParameter || false;
 	}
 }
