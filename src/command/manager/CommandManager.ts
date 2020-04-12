@@ -6,7 +6,7 @@ import type CommandExecution from '../CommandExecution';
 import type CoreModule from '../../module/CoreModule';
 
 export default class CommandManager {
-	public commandStore: Collection<string, Command>;
+	private commandStore: Collection<string, Command>;
 
 	private client: CharmClient;
 
