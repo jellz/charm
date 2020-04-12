@@ -13,18 +13,32 @@ export default class EventManager {
 		this.client = client;
 	}
 
-	registerEventHandler(event: EventHandler) {
-		if (!event.eventName)
+	registerEventHandler(handler: EventHandler) {
+		if (!handler.eventName)
 			throw new TypeError(
 				"You can't register an event that is missing a Discord.js event name"
 			);
-		this.client.on(event.eventName as keyof ClientEvents, (...params) =>
-			event.function(...params)
+
+    let handlerOverrode: EventHandler | undefined = this.eventStore.get(handler.id);
+    if (handlerOverrode) {
+      console.log('overriding handler', handlerOverrode.id, handler.module.constructor.name);
+      this.deregisterHandler(handlerOverrode);
+    }
+		handler.wrapperFunction = (...params: any[]) =>
+			handler.function.apply(handler.module, params);
+		this.client.on(
+			handler.eventName as keyof ClientEvents,
+			handler.wrapperFunction
 		);
-		this.eventStore.set(event.id, event);
+		this.eventStore.set(handler.id, handler);
 	}
 
-	getEventsByModule(modId: string) {
-		return this.eventStore.array().filter(e => modId === e.module.id);
+	deregisterHandler(handler: EventHandler) {
+    if (!this.eventStore.has(handler.id)) throw Error('You cannot deregister a non-existent handler');
+		const h: EventHandler = this.eventStore.get(handler.id)!;
+		if (h.wrapperFunction)
+			this.client.removeListener(h.eventName, h.wrapperFunction);
+		this.eventStore.delete(h.id);
+		return true;
 	}
 }

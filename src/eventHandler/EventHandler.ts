@@ -3,10 +3,11 @@ import type EventHandlerOptions from './EventHandlerOptions';
 
 export default class EventHandler {
 	public name: string;
-	public eventName: string | null;
+	public eventName: string;
 	public options?: Partial<EventHandlerOptions>;
 	public function: Function;
 	public module: Module;
+  public wrapperFunction?: (...params: any[]) => void;
 
   // Handler options
   public id: string;
@@ -23,11 +24,11 @@ export default class EventHandler {
 		// TODO : check if eventName is empty/wrong
 		this.eventName = eventName;
 		this.options = options;
-		this.function = func;
+    this.function = func;
     this.module = module;
 
     // Handler options
 		this.description = this.options.description;
 		this.id = this.options.id || `${this.module.id}/${this.name}`;
-	}
+  }
 }

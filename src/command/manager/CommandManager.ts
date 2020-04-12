@@ -24,31 +24,34 @@ export default class CommandManager {
 
 	// This function is called after something determined a command was sent. The purpose of this function is to find the appropriate function to handle the command and call it.
 	dispatchCommand(execution: CommandExecution) {
-		const cmd = this.getCommandByLabel(execution.label);
-		if (!cmd)
+		const cmds = this.getCommandsByLabel(execution.label).array();
+		if (cmds.length === 0)
 			return console.error(
 				`Tried to dispatch a non-existent command? ${execution.message.id}`
 			);
-		try {
-			const coreMod = this.client.moduleManager.getModule(
-				'coreModule'
-			) as CoreModule;
-			const callArgs: any[] = coreMod.parseCommandArguments(
-				cmd,
-				execution.args
-			);
-			cmd.function(execution, ...callArgs);
-		} catch (err) {
-			console.error(err);
-			const error: Error = err;
-			return execution.message.channel.send(
-				`There was an error while executing this command: ${error.message}`
-			);
+		for (const cmd of cmds) {
+			console.log('cmd', cmd.id);
+			try {
+				const coreMod = this.client.moduleManager.getModule(
+					'charm:CoreModule'
+				) as CoreModule;
+				const callArgs: any[] = coreMod.parseCommandArguments(
+					cmd,
+					execution.args
+				);
+				if (cmd.function(execution, ...callArgs) === true) break;
+			} catch (err) {
+				console.error(err);
+				const error: Error = err;
+				return execution.message.channel.send(
+					`There was an error while executing this command: ${error.message}`
+				);
+			}
 		}
 	}
 
-	getCommandByLabel(label: string) {
-		return this.commandStore.find(
+	getCommandsByLabel(label: string) {
+		return this.commandStore.filter(
 			c => c.name == label || c.aliases.includes(label)
 		);
 	}
