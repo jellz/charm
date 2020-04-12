@@ -30,7 +30,7 @@ export default class ModuleManager {
 		});
 		mod.getCommands().forEach(c => {
       c.function = c.function.bind(mod);
-      console.log(c.id);
+      // console.log(c.id);
 			this.client.commandManager.registerCommand(c);
 		});
 		this.moduleStore.set(mod.id, mod);

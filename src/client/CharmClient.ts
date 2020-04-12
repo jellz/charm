@@ -25,6 +25,6 @@ export default class CharmClient extends Client {
 			prefix: options.prefix || 'c!',
 		};
 
-		this.moduleManager.registerModule(CoreModule);
+    this.moduleManager.registerModule(CoreModule);
 	}
 }

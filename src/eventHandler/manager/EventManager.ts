@@ -21,7 +21,7 @@ export default class EventManager {
 
     let handlerOverrode: EventHandler | undefined = this.eventStore.get(handler.id);
     if (handlerOverrode) {
-      console.log('overriding handler', handlerOverrode.id, handler.module.constructor.name);
+      // console.log('overriding handler', handlerOverrode.id, handler.module.constructor.name);
       this.deregisterHandler(handlerOverrode);
     }
 		handler.wrapperFunction = (...params: any[]) =>

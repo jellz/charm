@@ -6,7 +6,7 @@ import type CommandExecution from '../CommandExecution';
 import type CoreModule from '../../module/CoreModule';
 
 export default class CommandManager {
-	private commandStore: Collection<string, Command>;
+	public commandStore: Collection<string, Command>;
 
 	private client: CharmClient;
 
@@ -17,9 +17,21 @@ export default class CommandManager {
 	}
 
 	registerCommand(command: Command) {
-		if (this.commandStore.get(command.id))
-			throw `A command with this name already exists (${command.id})`;
+		const overridingCommand = this.commandStore.find(
+      c =>
+        command.id === c.id ||
+				command.name === c.name ||
+				command.aliases.some(r => c.aliases.indexOf(r) >= 0)
+    );
+		if (overridingCommand) {
+      command.overriding = true;
+      if (!command.aliases.includes(command.name)) command.aliases.push(command.name);
+      command.name = overridingCommand.name;
+    }
 		this.commandStore.set(command.id, command);
+		this.commandStore = this.commandStore.sort((a, b) =>
+			a === b ? 0 : a ? -1 : 1
+		); //sort by overriding = true first
 	}
 
 	// This function is called after something determined a command was sent. The purpose of this function is to find the appropriate function to handle the command and call it.
@@ -30,7 +42,6 @@ export default class CommandManager {
 				`Tried to dispatch a non-existent command? ${execution.message.id}`
 			);
 		for (const cmd of cmds) {
-			console.log('cmd', cmd.id);
 			try {
 				const coreMod = this.client.moduleManager.getModule(
 					'charm:CoreModule'
@@ -52,7 +63,7 @@ export default class CommandManager {
 
 	getCommandsByLabel(label: string) {
 		return this.commandStore.filter(
-			c => c.name == label || c.aliases.includes(label)
+			c => c.name === label || c.aliases.includes(label)
 		);
 	}
 }
