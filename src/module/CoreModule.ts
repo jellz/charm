@@ -9,20 +9,20 @@ import type CharmClient from '..';
 import Command from '../command/decorator/CommandDecorator';
 
 export default class CoreModule extends Module {
-  constructor(client: CharmClient) {
-    super(client, 'charm:CoreModule');
-  }
+	constructor(client: CharmClient) {
+		super(client, 'charm:CoreModule');
+	}
 
 	@EventHandler('ready')
 	ready() {
 		console.log(`Logged in as ${this.client.user?.tag}!!!`);
 	}
 
-  @Command()
-  test(e: CommandExecution): boolean {
-    e.message.reply('test!');
-    return true;
-  }
+	@Command()
+	test(e: CommandExecution): boolean {
+		e.message.reply('test!');
+		return true;
+	}
 
 	@EventHandler('message', { description: 'The command dispatcher' })
 	onMessage(msg: Message) {
@@ -77,10 +77,10 @@ export default class CoreModule extends Module {
 
 			if (p === params[params.length - 1] && cmd.restLastParameter) {
 				callArgs.push(args.join(' '));
-        return callArgs;
-      }
+				return callArgs;
+			}
 
-      if (!p) return callArgs;
+			if (!p) return callArgs;
 
 			try {
 				switch (p.fn) {
@@ -126,6 +126,5 @@ export default class CoreModule extends Module {
 			args.shift();
 		}
 		return callArgs;
-  }
-  
+	}
 }

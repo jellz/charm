@@ -1,17 +1,17 @@
 {
-  "name": "charm",
-  "version": "0.0.1",
-  "description": "A Discord.js framework",
-  "main": "src/index.ts",
-  "repository": "git@github.com:jellz/charm",
-  "author": "Daniel G <danielgulic@gmail.com>",
-  "license": "MIT",
-  "private": false,
-  "dependencies": {
-    "discord.js": "discordjs/discord.js",
-    "reflect-metadata": "^0.1.13"
-  },
-  "devDependencies": {
-    "@types/node": "^13.11.1"
-  }
+	"name": "charm",
+	"version": "0.0.1",
+	"description": "A Discord.js framework",
+	"main": "src/index.ts",
+	"repository": "git@github.com:jellz/charm",
+	"author": "Daniel G <danielgulic@gmail.com>",
+	"license": "MIT",
+	"private": false,
+	"dependencies": {
+		"discord.js": "discordjs/discord.js",
+		"reflect-metadata": "^0.1.13"
+	},
+	"devDependencies": {
+		"@types/node": "^13.11.1"
+	}
 }

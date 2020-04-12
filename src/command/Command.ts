@@ -8,8 +8,8 @@ export default class Command {
 	public name: string;
 	public function: (e: CommandExecution, ...params: any[]) => boolean;
 	public module: Module;
-  public readonly params: CommandParameter[];
-  public overriding?: boolean;
+	public readonly params: CommandParameter[];
+	public overriding?: boolean;
 
 	public id: string;
 

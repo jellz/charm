@@ -36,7 +36,8 @@ export default function Command(
 			if (optionals.includes(i)) builtParams[i].optional = true;
 		}
 
-    if (builtParams[0].optional) throw new TypeError('The first parameter cannot be optional');
+		if (builtParams[0].optional)
+			throw new TypeError('The first parameter cannot be optional');
 
 		let lastOptional: boolean | null = null;
 		for (let i = builtParams.length - 1; i > 0; i--) {
@@ -47,13 +48,13 @@ export default function Command(
 				throw new TypeError('Only last parameters can be optional');
 		}
 
-    // TODO add validation of function return type
-    const cmd: CommandMetadata = {
-      name: propertyKey,
-      options,
-      function: descriptor.value,
-      params: builtParams,
-    }
+		// TODO add validation of function return type
+		const cmd: CommandMetadata = {
+			name: propertyKey,
+			options,
+			function: descriptor.value,
+			params: builtParams,
+		};
 		const commandsMetadata =
 			Reflect.getMetadata('charm:commandsMetadata', target) || [];
 		commandsMetadata.push(cmd);

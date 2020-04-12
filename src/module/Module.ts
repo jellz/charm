@@ -13,17 +13,22 @@ export default class Module {
 
 	constructor(client: CharmClient, id?: string) {
 		this.client = client;
-    this.id = id || this.constructor.name;
+		this.id = id || this.constructor.name;
 	}
 
 	getEventHandlers() {
-    const eventsMetadata: EventHandlerMetadata[] = Reflect.getMetadata('charm:eventsMetadata', this) || [];
-    return eventsMetadata.map(m => new EventHandler(m.name, m.eventName, m.options, m.function, this));
-  }
+		const eventsMetadata: EventHandlerMetadata[] =
+			Reflect.getMetadata('charm:eventsMetadata', this) || [];
+		return eventsMetadata.map(
+			m => new EventHandler(m.name, m.eventName, m.options, m.function, this)
+		);
+	}
 
 	getCommands() {
-    const commandsMetadata: CommandMetadata[] = Reflect.getMetadata('charm:commandsMetadata', this) || [];
-    return commandsMetadata.map(m => new Command(m.name, m.options, m.function, this, m.params));
-  }
-  
+		const commandsMetadata: CommandMetadata[] =
+			Reflect.getMetadata('charm:commandsMetadata', this) || [];
+		return commandsMetadata.map(
+			m => new Command(m.name, m.options, m.function, this, m.params)
+		);
+	}
 }

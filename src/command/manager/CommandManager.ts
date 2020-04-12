@@ -18,16 +18,17 @@ export default class CommandManager {
 
 	registerCommand(command: Command) {
 		const overridingCommand = this.commandStore.find(
-      c =>
-        command.id === c.id ||
+			c =>
+				command.id === c.id ||
 				command.name === c.name ||
 				command.aliases.some(r => c.aliases.indexOf(r) >= 0)
-    );
+		);
 		if (overridingCommand) {
-      command.overriding = true;
-      if (!command.aliases.includes(command.name)) command.aliases.push(command.name);
-      command.name = overridingCommand.name;
-    }
+			command.overriding = true;
+			if (!command.aliases.includes(command.name))
+				command.aliases.push(command.name);
+			command.name = overridingCommand.name;
+		}
 		this.commandStore.set(command.id, command);
 		this.commandStore = this.commandStore.sort((a, b) =>
 			a === b ? 0 : a ? -1 : 1

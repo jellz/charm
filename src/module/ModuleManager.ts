@@ -22,15 +22,15 @@ export default class ModuleManager {
 				'Please register a module instead of the base Module class'
 			);
 		let mod: Module;
-    mod = new module(this.client);
+		mod = new module(this.client);
 		mod.getEventHandlers().forEach(h => {
-      h.function = h.function.bind(mod);
-      // console.log(h.id);
+			h.function = h.function.bind(mod);
+			// console.log(h.id);
 			this.client.eventManager.registerEventHandler(h);
 		});
 		mod.getCommands().forEach(c => {
-      c.function = c.function.bind(mod);
-      // console.log(c.id);
+			c.function = c.function.bind(mod);
+			// console.log(c.id);
 			this.client.commandManager.registerCommand(c);
 		});
 		this.moduleStore.set(mod.id, mod);
