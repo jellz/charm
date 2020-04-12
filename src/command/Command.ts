@@ -1,11 +1,12 @@
 import type CommandOptions from './CommandOptions';
 import type Module from '../module/Module';
 import type CommandParameter from './CommandParameter';
+import type CommandExecution from '../command/CommandExecution';
 
 export default class Command {
 	public options: Partial<CommandOptions>;
 	public name: string;
-	public function: Function;
+	public function: (e: CommandExecution, ...params: any[]) => boolean;
 	public module: Module;
 	public readonly params: CommandParameter[];
 
@@ -19,7 +20,7 @@ export default class Command {
 	constructor(
 		name: string,
 		options: Partial<CommandOptions>,
-		func: Function,
+		func: (e: CommandExecution, ...params: any[]) => boolean,
 		module: Module,
 		params: CommandParameter[]
 	) {

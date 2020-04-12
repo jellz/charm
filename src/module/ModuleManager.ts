@@ -3,8 +3,6 @@ import { readdirSync } from 'fs';
 import { join } from 'path';
 
 import type CharmClient from '../..';
-import type Command from '../command/Command';
-import type EventHandler from '../eventHandler/EventHandler';
 
 import Module from './Module';
 
@@ -24,13 +22,15 @@ export default class ModuleManager {
 				'Please register a module instead of the base Module class'
 			);
 		let mod: Module;
-		mod = new module(this.client);
-		mod.getEventHandlers().forEach((h: EventHandler) => {
-			h.function = h.function.bind(mod);
+    mod = new module(this.client);
+		mod.getEventHandlers().forEach(h => {
+      h.function = h.function.bind(mod);
+      // console.log(h.id);
 			this.client.eventManager.registerEventHandler(h);
 		});
-		mod.getCommands().forEach((c: Command) => {
-			c.function = c.function.bind(mod);
+		mod.getCommands().forEach(c => {
+      c.function = c.function.bind(mod);
+      console.log(c.id);
 			this.client.commandManager.registerCommand(c);
 		});
 		this.moduleStore.set(mod.id, mod);

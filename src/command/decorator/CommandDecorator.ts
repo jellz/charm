@@ -2,6 +2,7 @@ import type Module from '../../module/Module';
 import type CommandOptions from '../CommandOptions';
 import type CommandParameter from '../CommandParameter';
 import type CommandMetadata from '../CommandMetadata';
+// import { CommandExecution } from '../..';
 
 export default function Command(
 	options: Partial<CommandOptions> | undefined = {}
@@ -46,6 +47,7 @@ export default function Command(
 				throw new TypeError('Only last parameters can be optional');
 		}
 
+    // TODO add validation of function return type
     const cmd: CommandMetadata = {
       name: propertyKey,
       options,

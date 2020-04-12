@@ -6,18 +6,25 @@ import EventHandler from '../eventHandler/decorator/EventHandlerDecorator';
 import type { CommandExecution } from '..';
 import type { default as CommandClass } from '../command/Command';
 import type CharmClient from '..';
+import Command from '../command/decorator/CommandDecorator';
 
 export default class CoreModule extends Module {
   constructor(client: CharmClient) {
     super(client, 'charm:CoreModule');
   }
 
-	@EventHandler('ready', { id: 'coreReadyHandler' })
+	@EventHandler('ready')
 	ready() {
 		console.log(`Logged in as ${this.client.user?.tag}!!!`);
 	}
 
-	@EventHandler('message', { description: 'The command dispatcher', id: 'coreCommandDispatcher' })
+  @Command()
+  test(e: CommandExecution): boolean {
+    e.message.reply('test!');
+    return true;
+  }
+
+	@EventHandler('message', { description: 'The command dispatcher' })
 	onMessage(msg: Message) {
 		if (
 			msg.author.bot ||
