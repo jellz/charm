@@ -1,5 +1,5 @@
 import { Collection } from 'discord.js';
-import { readdirSync } from 'fs';
+import { readdirSync, lstatSync } from 'fs';
 import { join } from 'path';
 
 import type CharmClient from '../..';
@@ -39,17 +39,18 @@ export default class ModuleManager {
 	loadModules(folderPath: string) {
 		const files = readdirSync(folderPath);
 		files.forEach(file => {
-			const fn = join(process.cwd(), folderPath, file);
-			const module = require(fn);
+      const modulePath = join(process.cwd(), folderPath, file);
+      if (lstatSync(modulePath).isDirectory()) return this.loadModules(join(folderPath, file));
+			const module = require(modulePath);
 			if (module.default) {
 				if (Object.getPrototypeOf(module.default) == Module)
 					this.registerModule(module.default);
 				else
 					throw new TypeError(
-						`The module ${fn} does not export a Module by default`
+						`The module ${modulePath} does not export a Module by default`
 					);
 			} else {
-				throw new Error(`The module ${fn} does not have a default export`);
+				throw new Error(`The module ${modulePath} does not have a default export`);
 			}
 		});
 	}
