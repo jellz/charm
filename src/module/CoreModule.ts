@@ -2,11 +2,13 @@ import { Message, User } from 'discord.js';
 
 import Module from './Module';
 import EventHandler from '../eventHandler/decorator/EventHandlerDecorator';
+import CommandExecution from '../command/execution/CommandExecution';
+import Command from '../command/decorator/CommandDecorator';
 
-import type { CommandExecution } from '..';
+import type CommandExecutionProps from '../command/execution/CommandExecutionProps';
 import type { default as CommandClass } from '../command/Command';
 import type CharmClient from '..';
-import Command from '../command/decorator/CommandDecorator';
+
 
 export default class CoreModule extends Module {
 	constructor(client: CharmClient) {
@@ -20,7 +22,7 @@ export default class CoreModule extends Module {
 
 	@Command()
 	test(e: CommandExecution): boolean {
-		e.message.reply('test!');
+		e.reply('test!');
 		return true;
 	}
 
@@ -40,7 +42,7 @@ export default class CoreModule extends Module {
 		_cmd.shift();
 		let args: string[] = _cmd;
 
-		const execution: CommandExecution = {
+		const execution: CommandExecutionProps = {
 			issuer: msg.author,
 			memberIssuer: msg.member || null,
 			channelType: msg.channel.type,
@@ -52,7 +54,7 @@ export default class CoreModule extends Module {
 
 			message: msg,
 		};
-		this.client.commandManager.dispatchCommand(execution);
+		this.client.commandManager.dispatchCommand(new CommandExecution(execution));
 	}
 
 	// REGEX

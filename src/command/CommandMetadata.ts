@@ -1,6 +1,6 @@
 import type CommandOptions from './CommandOptions';
 import type CommandParameter from './CommandParameter';
-import type CommandExecution from '../command/CommandExecution';
+import type CommandExecution from './execution/CommandExecution';
 
 export default interface CommandMetadata {
 	name: string;

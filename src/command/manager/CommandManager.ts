@@ -2,7 +2,7 @@ import { Collection } from 'discord.js';
 
 import type CharmClient from '../..';
 import type Command from '../Command';
-import type CommandExecution from '../CommandExecution';
+import type CommandExecution from '../execution/CommandExecution';
 import type CoreModule from '../../module/CoreModule';
 
 export default class CommandManager {
@@ -55,7 +55,7 @@ export default class CommandManager {
 			} catch (err) {
 				console.error(err);
 				const error: Error = err;
-				return execution.message.channel.send(
+				return execution.reply(
 					`There was an error while executing this command: ${error.message}`
 				);
 			}
