@@ -8,11 +8,11 @@ import ModuleManager from '../module/ModuleManager';
 import type CharmOptions from './CharmOptions';
 
 export default class CharmClient extends Client {
-	public commandManager: CommandManager;
-	public eventManager: EventManager;
-	public moduleManager: ModuleManager;
+	commandManager: CommandManager;
+	eventManager: EventManager;
+	moduleManager: ModuleManager;
 
-	public config: Partial<CharmOptions>;
+	config: Partial<CharmOptions>;
 
 	constructor(options: Partial<CharmOptions>, discordOptions: ClientOptions) {
 		super(discordOptions);

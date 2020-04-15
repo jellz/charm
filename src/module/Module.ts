@@ -8,8 +8,8 @@ import type EventHandlerMetadata from '../eventHandler/EventHandlerMetadata';
 import type CommandMetadata from '../command/CommandMetadata';
 
 export default class Module {
-	public client: CharmClient;
-	public id: string;
+	client: CharmClient;
+	id: string;
 
 	constructor(client: CharmClient, id?: string) {
 		this.client = client;

@@ -4,19 +4,19 @@ import type CommandParameter from './CommandParameter';
 import type CommandExecution from './execution/CommandExecution';
 
 export default class Command {
-	public options: Partial<CommandOptions>;
-	public name: string;
-	public function: (e: CommandExecution, ...params: any[]) => boolean;
-	public module: Module;
-	public readonly params: CommandParameter[];
-	public overriding?: boolean;
+	options: Partial<CommandOptions>;
+	name: string;
+	function: (e: CommandExecution, ...params: any[]) => boolean;
+	module: Module;
+	readonly params: CommandParameter[];
+	overriding?: boolean;
 
-	public id: string;
+	id: string;
 
 	// Command options
-	public aliases: string[];
-	public description?: string;
-	public restLastParameter: boolean;
+	aliases: string[];
+	description?: string;
+	restLastParameter: boolean;
 
 	constructor(
 		name: string,

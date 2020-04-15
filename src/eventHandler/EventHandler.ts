@@ -2,16 +2,16 @@ import type Module from '../module/Module';
 import type EventHandlerOptions from './EventHandlerOptions';
 
 export default class EventHandler {
-	public name: string;
-	public eventName: string;
-	public options?: Partial<EventHandlerOptions>;
-	public function: Function;
-	public module: Module;
-	public wrapperFunction?: (...params: any[]) => void;
+	name: string;
+	eventName: string;
+	options?: Partial<EventHandlerOptions>;
+	function: Function;
+	module: Module;
+	wrapperFunction?: (...params: any[]) => void;
 
 	// Handler options
-	public id: string;
-	public description?: string;
+	id: string;
+	description?: string;
 
 	constructor(
 		name: string,
