@@ -6,5 +6,5 @@ export interface CommandMetadata {
 	name: string;
 	params: CommandParameter[];
 	options: Partial<CommandOptions>;
-	function: (e: CommandExecution, ...args: any[]) => boolean;
+	function: (e: CommandExecution, ...args: unknown[]) => boolean;
 }

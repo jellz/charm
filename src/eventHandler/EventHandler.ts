@@ -7,7 +7,7 @@ export class EventHandler {
 	options?: Partial<EventHandlerOptions>;
 	function: Function;
 	module: Module;
-	wrapperFunction?: (...params: any[]) => void;
+	wrapperFunction?: (...params: unknown[]) => void;
 
 	// Handler options
 	id: string;

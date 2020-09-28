@@ -6,7 +6,7 @@ import { CommandExecution } from './execution/CommandExecution';
 export class Command {
 	options: Partial<CommandOptions>;
 	name: string;
-	function: (e: CommandExecution, ...params: any[]) => boolean;
+	function: (e: CommandExecution, ...params: unknown[]) => boolean;
 	module: Module;
 	readonly params: CommandParameter[];
 	overriding?: boolean;
@@ -21,7 +21,7 @@ export class Command {
 	constructor(
 		name: string,
 		options: Partial<CommandOptions>,
-		func: (e: CommandExecution, ...params: any[]) => boolean,
+		func: (e: CommandExecution, ...params: unknown[]) => boolean,
 		module: Module,
 		params: CommandParameter[]
 	) {

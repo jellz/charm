@@ -26,7 +26,7 @@ export class EventManager {
 			// console.log('overriding handler', handlerOverrode.id, handler.module.constructor.name);
 			this.deregisterHandler(handlerOverrode);
 		}
-		handler.wrapperFunction = (...params: any[]) =>
+		handler.wrapperFunction = (...params: unknown[]) =>
 			handler.function.apply(handler.module, params);
 		this.client.on(
 			handler.eventName as keyof ClientEvents,

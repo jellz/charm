@@ -36,7 +36,7 @@ export class CommandManager {
 	}
 
 	// This function is called after something determined a command was sent. The purpose of this function is to find the appropriate function to handle the command and call it.
-	dispatchCommand(execution: CommandExecution) {
+	async dispatchCommand(execution: CommandExecution) {
 		const cmds = this.getCommandsByLabel(execution.label).array();
 		if (cmds.length === 0)
 			return console.error(
@@ -47,7 +47,7 @@ export class CommandManager {
 				const coreMod = this.client.moduleManager.getModule(
 					'charm:CoreModule'
 				) as CoreModule;
-				const callArgs: any[] = coreMod.parseCommandArguments(
+				const callArgs: unknown[] = await coreMod.parseCommandArguments(
 					cmd,
 					execution.args
 				);

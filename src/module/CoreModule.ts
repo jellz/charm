@@ -26,7 +26,7 @@ export class CoreModule extends Module {
 	}
 
 	@EventHandler('message', { description: 'The command dispatcher' })
-	onMessage(msg: Message) {
+	async onMessage(msg: Message) {
 		if (
 			msg.author.bot ||
 			!msg.content.toLowerCase().startsWith(this.client.config.prefix!)
@@ -53,15 +53,17 @@ export class CoreModule extends Module {
 
 			message: msg,
 		};
-		this.client.commandManager.dispatchCommand(new CommandExecution(execution));
+		await this.client.commandManager.dispatchCommand(
+			new CommandExecution(execution)
+		);
 	}
 
 	// REGEX
 	USER_MENTION_OR_ID_REGEX = /(<@)?!?\d{17,20}>?/;
 	USER_MENTION_REGEX = /^<@!?(\d+)>$/;
 
-	parseCommandArguments(cmd: CommandClass, args: string[]) {
-		const callArgs: any[] = [];
+	async parseCommandArguments(cmd: CommandClass, args: string[]) {
+		const callArgs: unknown[] = [];
 		const refArgs = args.slice(0); //create a copy
 		const minimumArgLength = cmd.params.filter(c => !c.optional).length - 1;
 		const params = cmd.params.slice(0);
@@ -97,7 +99,7 @@ export class CoreModule extends Module {
 								this.USER_MENTION_REGEX.exec(noMention) ||
 								[];
 							const id = userMatch[1] ? userMatch[1] : userMatch[0];
-							const userArg = this.client.users.cache.get(id);
+							const userArg = await this.client.users.fetch(id);
 							callArgs.push(userArg);
 						} else
 							throw new TypeError(`Missing desired argument: ${p.fn.name}`);
