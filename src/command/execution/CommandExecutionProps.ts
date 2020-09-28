@@ -3,7 +3,7 @@ import { User } from 'discord.js';
 import { Channel } from 'discord.js';
 import { Message } from 'discord.js';
 
-export default interface CommandExecutionProps {
+export interface CommandExecutionProps {
 	issuer: User;
 	memberIssuer: GuildMember | null;
 	channelType: string;

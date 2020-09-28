@@ -4,9 +4,9 @@ import { join } from 'path';
 
 import CharmClient from '../..';
 
-import Module from './Module';
+import { Module } from './Module';
 
-export default class ModuleManager {
+export class ModuleManager {
 	private client: CharmClient;
 	private moduleStore: Collection<string, Module>;
 
@@ -39,8 +39,9 @@ export default class ModuleManager {
 	loadModules(folderPath: string) {
 		const files = readdirSync(folderPath);
 		files.forEach(file => {
-      const modulePath = join(process.cwd(), folderPath, file);
-      if (lstatSync(modulePath).isDirectory()) return this.loadModules(join(folderPath, file));
+			const modulePath = join(process.cwd(), folderPath, file);
+			if (lstatSync(modulePath).isDirectory())
+				return this.loadModules(join(folderPath, file));
 			const module = require(modulePath);
 			if (module.default) {
 				if (Object.getPrototypeOf(module.default) == Module)
@@ -50,7 +51,9 @@ export default class ModuleManager {
 						`The module ${modulePath} does not export a Module by default`
 					);
 			} else {
-				throw new Error(`The module ${modulePath} does not have a default export`);
+				throw new Error(
+					`The module ${modulePath} does not have a default export`
+				);
 			}
 		});
 	}

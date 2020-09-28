@@ -1,16 +1,15 @@
 import { Message, User } from 'discord.js';
 
-import Module from './Module';
-import EventHandler from '../eventHandler/decorator/EventHandlerDecorator';
-import CommandExecution from '../command/execution/CommandExecution';
-import Command from '../command/decorator/CommandDecorator';
+import { Module } from './Module';
+import { EventHandler } from '../eventHandler/decorator/EventHandlerDecorator';
+import { CommandExecution } from '../command/execution/CommandExecution';
+import { Command } from '../command/decorator/CommandDecorator';
 
-import CommandExecutionProps from '../command/execution/CommandExecutionProps';
-import { default as CommandClass } from '../command/Command';
+import { CommandExecutionProps } from '../command/execution/CommandExecutionProps';
+import { Command as CommandClass } from '../command/Command';
 import CharmClient from '..';
 
-
-export default class CoreModule extends Module {
+export class CoreModule extends Module {
 	constructor(client: CharmClient) {
 		super(client, 'charm:CoreModule');
 	}

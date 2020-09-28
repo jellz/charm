@@ -1,13 +1,13 @@
 import { Client, ClientOptions } from 'discord.js';
 
-import EventManager from '../eventHandler/manager/EventManager';
-import CommandManager from '../command/manager/CommandManager';
-import CoreModule from '../module/CoreModule';
-import ModuleManager from '../module/ModuleManager';
+import { EventManager } from '../eventHandler/manager/EventManager';
+import { CommandManager } from '../command/manager/CommandManager';
+import { CoreModule } from '../module/CoreModule';
+import { ModuleManager } from '../module/ModuleManager';
 
-import CharmOptions from './CharmOptions';
+import { CharmOptions } from './CharmOptions';
 
-export default class CharmClient extends Client {
+export class CharmClient extends Client {
 	commandManager: CommandManager;
 	eventManager: EventManager;
 	moduleManager: ModuleManager;

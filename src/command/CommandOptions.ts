@@ -1,4 +1,4 @@
-export default interface CommandOptions {
+export interface CommandOptions {
 	name?: string;
 	id?: string;
 	aliases?: string[];

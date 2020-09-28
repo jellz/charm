@@ -6,7 +6,7 @@ import { CategoryChannel } from 'discord.js';
 import { NewsChannel } from 'discord.js';
 import { StoreChannel } from 'discord.js';
 
-export default function getSpecificChannelFromChannel(channel: Channel) {
+export function getSpecificChannelFromChannel(channel: Channel) {
 	switch (channel.type) {
 		case 'dm':
 			return channel as DMChannel;

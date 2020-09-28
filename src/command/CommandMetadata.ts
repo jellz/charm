@@ -1,8 +1,8 @@
-import CommandOptions from './CommandOptions';
-import CommandParameter from './CommandParameter';
-import CommandExecution from './execution/CommandExecution';
+import { CommandOptions } from './CommandOptions';
+import { CommandParameter } from './CommandParameter';
+import { CommandExecution } from './execution/CommandExecution';
 
-export default interface CommandMetadata {
+export interface CommandMetadata {
 	name: string;
 	params: CommandParameter[];
 	options: Partial<CommandOptions>;

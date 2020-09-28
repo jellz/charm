@@ -1,4 +1,4 @@
-export default interface CommandParameter {
+export interface CommandParameter {
 	fn: Function;
 	optional: boolean;
 }

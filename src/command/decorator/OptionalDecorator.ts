@@ -1,6 +1,6 @@
-import Module from '../../module/Module';
+import { Module } from '../../module/Module';
 
-export default function Optional(
+export function Optional(
 	target: Object,
 	propertyKey: string | symbol,
 	parameterIndex: number

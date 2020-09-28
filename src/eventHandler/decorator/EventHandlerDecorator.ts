@@ -1,8 +1,8 @@
-import Module from '../../module/Module';
-import EventHandlerOptions from '../EventHandlerOptions';
-import EventHandlerMetadata from '../EventHandlerMetadata';
+import { Module } from '../../module/Module';
+import { EventHandlerOptions } from '../EventHandlerOptions';
+import { EventHandlerMetadata } from '../EventHandlerMetadata';
 
-export default function EventHandler(
+export function EventHandler(
 	eventName: string,
 	options: Partial<EventHandlerOptions> | undefined = {}
 ) {

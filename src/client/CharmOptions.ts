@@ -1,3 +1,3 @@
-export default interface CharmOptions {
+export interface CharmOptions {
 	prefix?: string;
 }

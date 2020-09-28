@@ -1,6 +1,6 @@
-import EventHandlerOptions from './EventHandlerOptions';
+import { EventHandlerOptions } from './EventHandlerOptions';
 
-export default interface EventHandlerMetadata {
+export interface EventHandlerMetadata {
 	name: string;
 	eventName: string;
 	options: Partial<EventHandlerOptions>;

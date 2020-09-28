@@ -1,7 +1,7 @@
-import Module from '../module/Module';
-import EventHandlerOptions from './EventHandlerOptions';
+import { Module } from '../module/Module';
+import { EventHandlerOptions } from './EventHandlerOptions';
 
-export default class EventHandler {
+export class EventHandler {
 	name: string;
 	eventName: string;
 	options?: Partial<EventHandlerOptions>;

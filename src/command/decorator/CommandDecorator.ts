@@ -1,12 +1,10 @@
-import Module from '../../module/Module';
-import CommandOptions from '../CommandOptions';
-import CommandParameter from '../CommandParameter';
-import CommandMetadata from '../CommandMetadata';
+import { Module } from '../../module/Module';
+import { CommandOptions } from '../CommandOptions';
+import { CommandParameter } from '../CommandParameter';
+import { CommandMetadata } from '../CommandMetadata';
 // import { CommandExecution } from '../..';
 
-export default function Command(
-	options: Partial<CommandOptions> | undefined = {}
-) {
+export function Command(options: Partial<CommandOptions> | undefined = {}) {
 	return function (
 		target: Module,
 		propertyKey: string,

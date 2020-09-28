@@ -1,9 +1,9 @@
-import CommandOptions from './CommandOptions';
-import Module from '../module/Module';
-import CommandParameter from './CommandParameter';
-import CommandExecution from './execution/CommandExecution';
+import { CommandOptions } from './CommandOptions';
+import { Module } from '../module/Module';
+import { CommandParameter } from './CommandParameter';
+import { CommandExecution } from './execution/CommandExecution';
 
-export default class Command {
+export class Command {
 	options: Partial<CommandOptions>;
 	name: string;
 	function: (e: CommandExecution, ...params: any[]) => boolean;

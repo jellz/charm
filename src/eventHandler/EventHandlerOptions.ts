@@ -1,4 +1,4 @@
-export default interface EventHandlerOptions {
+export interface EventHandlerOptions {
 	description?: string;
 	id?: string;
 }
