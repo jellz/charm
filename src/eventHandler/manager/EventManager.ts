@@ -1,6 +1,6 @@
 import { ClientEvents, Collection } from 'discord.js';
 
-import CharmClient from '../..';
+import { CharmClient } from '../..';
 import { EventHandler } from '../EventHandler';
 
 export class EventManager {

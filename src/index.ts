@@ -1,10 +1,10 @@
 // Client
-export { default } from './client/CharmClient';
+export { CharmClient } from './client/CharmClient';
 
 // Decorators
-export { default as Command } from './command/decorator/CommandDecorator';
-export { default as Optional } from './command/decorator/OptionalDecorator';
-export { default as EventHandler } from './eventHandler/decorator/EventHandlerDecorator';
+export { Command } from './command/decorator/CommandDecorator';
+export { Optional } from './command/decorator/OptionalDecorator';
+export { EventHandler } from './eventHandler/decorator/EventHandlerDecorator';
 
-export { default as Module } from './module/Module';
-export { default as CommandExecution } from './command/execution/CommandExecution';
+export { Module } from './module/Module';
+export { CommandExecution } from './command/execution/CommandExecution';

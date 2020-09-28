@@ -3,7 +3,7 @@ import 'reflect-metadata';
 import { EventHandler } from '../eventHandler/EventHandler';
 import { Command } from '../command/Command';
 
-import CharmClient from '../..';
+import { CharmClient } from '../..';
 import { EventHandlerMetadata } from '../eventHandler/EventHandlerMetadata';
 import { CommandMetadata } from '../command/CommandMetadata';
 

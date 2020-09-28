@@ -7,7 +7,7 @@ import { Command } from '../command/decorator/CommandDecorator';
 
 import { CommandExecutionProps } from '../command/execution/CommandExecutionProps';
 import { Command as CommandClass } from '../command/Command';
-import CharmClient from '..';
+import { CharmClient } from '..';
 
 export class CoreModule extends Module {
 	constructor(client: CharmClient) {

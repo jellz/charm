@@ -1,6 +1,6 @@
 import { Collection } from 'discord.js';
 
-import CharmClient from '../..';
+import { CharmClient } from '../..';
 import { Command } from '../Command';
 import { CommandExecution } from '../execution/CommandExecution';
 import { CoreModule } from '../../module/CoreModule';
