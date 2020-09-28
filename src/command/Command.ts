@@ -1,7 +1,7 @@
-import type CommandOptions from './CommandOptions';
-import type Module from '../module/Module';
-import type CommandParameter from './CommandParameter';
-import type CommandExecution from './execution/CommandExecution';
+import CommandOptions from './CommandOptions';
+import Module from '../module/Module';
+import CommandParameter from './CommandParameter';
+import CommandExecution from './execution/CommandExecution';
 
 export default class Command {
 	options: Partial<CommandOptions>;

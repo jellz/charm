@@ -1,7 +1,7 @@
 import { ClientEvents, Collection } from 'discord.js';
 
-import type CharmClient from '../..';
-import type EventHandler from '../EventHandler';
+import CharmClient from '../..';
+import EventHandler from '../EventHandler';
 
 export default class EventManager {
 	private eventStore: Collection<string, EventHandler>;

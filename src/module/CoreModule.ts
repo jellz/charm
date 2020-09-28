@@ -5,9 +5,9 @@ import EventHandler from '../eventHandler/decorator/EventHandlerDecorator';
 import CommandExecution from '../command/execution/CommandExecution';
 import Command from '../command/decorator/CommandDecorator';
 
-import type CommandExecutionProps from '../command/execution/CommandExecutionProps';
-import type { default as CommandClass } from '../command/Command';
-import type CharmClient from '..';
+import CommandExecutionProps from '../command/execution/CommandExecutionProps';
+import { default as CommandClass } from '../command/Command';
+import CharmClient from '..';
 
 
 export default class CoreModule extends Module {

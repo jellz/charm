@@ -1,9 +1,9 @@
 
 import { MessageEmbed } from 'discord.js';
-import type { User } from 'discord.js';
-import type { Channel } from 'discord.js';
-import type { Message } from 'discord.js';
-import type CommandExecutionProps from './CommandExecutionProps';
+import { User } from 'discord.js';
+import { Channel } from 'discord.js';
+import { Message } from 'discord.js';
+import CommandExecutionProps from './CommandExecutionProps';
 
 export default class CommandExecution {
 	issuer: User;

@@ -1,5 +1,5 @@
-import type Module from '../module/Module';
-import type EventHandlerOptions from './EventHandlerOptions';
+import Module from '../module/Module';
+import EventHandlerOptions from './EventHandlerOptions';
 
 export default class EventHandler {
 	name: string;

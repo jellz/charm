@@ -1,9 +1,9 @@
 import { Collection } from 'discord.js';
 
-import type CharmClient from '../..';
-import type Command from '../Command';
-import type CommandExecution from '../execution/CommandExecution';
-import type CoreModule from '../../module/CoreModule';
+import CharmClient from '../..';
+import Command from '../Command';
+import CommandExecution from '../execution/CommandExecution';
+import CoreModule from '../../module/CoreModule';
 
 export default class CommandManager {
 	private commandStore: Collection<string, Command>;

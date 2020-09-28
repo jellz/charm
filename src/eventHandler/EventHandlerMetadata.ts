@@ -1,4 +1,4 @@
-import type EventHandlerOptions from './EventHandlerOptions';
+import EventHandlerOptions from './EventHandlerOptions';
 
 export default interface EventHandlerMetadata {
 	name: string;

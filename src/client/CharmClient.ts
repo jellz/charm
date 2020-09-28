@@ -5,7 +5,7 @@ import CommandManager from '../command/manager/CommandManager';
 import CoreModule from '../module/CoreModule';
 import ModuleManager from '../module/ModuleManager';
 
-import type CharmOptions from './CharmOptions';
+import CharmOptions from './CharmOptions';
 
 export default class CharmClient extends Client {
 	commandManager: CommandManager;

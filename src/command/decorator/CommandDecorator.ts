@@ -1,7 +1,7 @@
-import type Module from '../../module/Module';
-import type CommandOptions from '../CommandOptions';
-import type CommandParameter from '../CommandParameter';
-import type CommandMetadata from '../CommandMetadata';
+import Module from '../../module/Module';
+import CommandOptions from '../CommandOptions';
+import CommandParameter from '../CommandParameter';
+import CommandMetadata from '../CommandMetadata';
 // import { CommandExecution } from '../..';
 
 export default function Command(

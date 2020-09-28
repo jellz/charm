@@ -2,7 +2,7 @@ import { Collection } from 'discord.js';
 import { readdirSync, lstatSync } from 'fs';
 import { join } from 'path';
 
-import type CharmClient from '../..';
+import CharmClient from '../..';
 
 import Module from './Module';
 

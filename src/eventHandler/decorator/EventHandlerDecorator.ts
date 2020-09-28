@@ -1,6 +1,6 @@
-import type Module from '../../module/Module';
-import type EventHandlerOptions from '../EventHandlerOptions';
-import type EventHandlerMetadata from '../EventHandlerMetadata';
+import Module from '../../module/Module';
+import EventHandlerOptions from '../EventHandlerOptions';
+import EventHandlerMetadata from '../EventHandlerMetadata';
 
 export default function EventHandler(
 	eventName: string,
