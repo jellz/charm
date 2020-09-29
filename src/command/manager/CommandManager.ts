@@ -55,9 +55,7 @@ export class CommandManager {
 			} catch (err) {
 				console.error(err);
 				const error: Error = err;
-				return execution.reply(
-					`There was an error while executing this command: ${error.message}`
-				);
+				return execution.reply(`:warning: ${error.message}`);
 			}
 		}
 	}
